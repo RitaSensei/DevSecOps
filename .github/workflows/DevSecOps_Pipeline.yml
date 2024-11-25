@@ -59,7 +59,7 @@ jobs:
       - name: Upload CodeQL scan results as artifact
         uses: actions/upload-artifact@v4
         with: 
-          name: codeql-report
+          name: codeql-scan-results
           path: codeql-analysis-results.json
 
       # SCA: Snyk Vulnerability Scanning
@@ -116,7 +116,7 @@ jobs:
       - name: Download CodeQL Results
         uses: actions/download-artifact@v4
         with:
-          name: codeql-report
+          name: codeql-scan-results
           path: analysis-results/codeql
 
       - name: Download Snyk Results
