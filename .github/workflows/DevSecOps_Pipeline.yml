@@ -116,7 +116,7 @@ jobs:
       - name: Download CodeQL Results
         uses: actions/download-artifact@v4
         with:
-          name: codeql-analysis-results
+          name: codeql-report
           path: analysis-results/codeql
 
       - name: Download Snyk Results
