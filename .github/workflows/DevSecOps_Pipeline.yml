@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: codeql-scan-results
-          path: codeql-analysis-results.json
+          path: codeql-analysis-results/*.json
 
       # SCA: Snyk Vulnerability Scanning
       - uses: actions/checkout@master
