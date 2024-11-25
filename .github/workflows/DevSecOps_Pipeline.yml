@@ -39,7 +39,7 @@ jobs:
 
       # SAST: CodeQL Security Analysis
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
           queries: security-extended
@@ -48,10 +48,10 @@ jobs:
               - 'data/static/codefixes'
               
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
         
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           category: "/language:javascript"
           output: "codeql-analysis-results"
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: codeql-report
-          path: codeql-analysis-results/*.sarif
+          path: codeql-analysis-results.json
 
       # SCA: Snyk Vulnerability Scanning
       - uses: actions/checkout@master
