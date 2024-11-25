@@ -53,14 +53,14 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:javascript"
-          output: "codeql-analysis-results"
+          # category: "/language:javascript"
+          output: codeql-analysis-results.json
           
       - name: Upload CodeQL scan results as artifact
         uses: actions/upload-artifact@v4
         with: 
           name: codeql-scan-results
-          path: codeql-analysis-results/*.json
+          path: codeql-analysis-results.json
 
       # SCA: Snyk Vulnerability Scanning
       - uses: actions/checkout@master
