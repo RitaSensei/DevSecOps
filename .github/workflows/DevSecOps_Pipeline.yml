@@ -142,7 +142,7 @@ jobs:
             reduce .[] as $item ({}; 
               .results += $item.results
             )
-          ' analysis-results/codeql/*.sarif scan-results/snyk/*.sarif > reports/combined-results.sarif
+          ' analysis-results/codeql/*.sarif analysis-results/snyk/*.sarif > reports/combined-results.sarif
     
       - name: SonarCloud DAST Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -180,17 +180,17 @@ jobs:
           echo "Final Files Structure:"
           ls -R analysis-results/
 
-  # redeploy:
-  #     name: Redeploy Juice Shop App
-  #     runs-on: ubuntu-latest
-  #     needs: vulnerability_management
-  #     if: success()
+  redeploy:
+      name: Redeploy Juice Shop App
+      runs-on: ubuntu-latest
+      needs: vulnerability_management
+      if: success()
   
-  #     steps:
-  #       - name: Pull the latest Juice Shop docker image
-  #         run: docker pull bkimminich/juice-shop
+      steps:
+        - name: Pull the latest Juice Shop docker image
+          run: docker pull bkimminich/juice-shop
   
-  #       - name: Deploy & Verify Juice Shop App working
-  #         run: |
-  #           docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
-  #           timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 5; done' || false
+        - name: Deploy & Verify Juice Shop App working
+          run: |
+            docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
+            timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 5; done' || false
