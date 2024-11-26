@@ -53,8 +53,8 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          # category: "/language:javascript"
-          output: codeql-analysis-results.json
+          category: "/language:javascript"
+          output: "codeql-analysis-results"
           
       - name: Upload CodeQL scan results as artifact
         uses: actions/upload-artifact@v4
@@ -67,7 +67,7 @@ jobs:
       - name: Install the dependencies
         run: npm install
 
-      - name: Create sarif-files directory
+      - name: Create sarif files directory
         run: mkdir -p sarif-files
         
       - name: Run Snyk to check for vulnerabilities
