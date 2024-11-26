@@ -74,10 +74,10 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - name: Upload Snyk scan results to Github Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: snyk-results.json
+      # - name: Upload Snyk scan results to Github Code Scanning
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: snyk-results.json
           
       - name: Upload Snyk scan results as artifact
         uses: actions/upload-artifact@v4
