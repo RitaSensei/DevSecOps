@@ -60,22 +60,23 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: codeql-scan-results
-          path: codeql-analysis-results.json
+          path: codeql-analysis-results.sarif
 
       # SCA: Snyk Vulnerability Scanning
       - uses: actions/checkout@master
       - name: Install the dependencies
         run: npm install
+
+      - name: Create sarif-files directory
+        run: mkdir -p sarif-files
         
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: snyk test --json-file-output=snyk-results.json
-          
-      - name: Verify Snyk report file existence
-        run: ls -la
+          args: --sarif-file-output=snyk-results.sarif
+
       # - name: Upload Snyk scan results to Github Code Scanning
       #   uses: github/codeql-action/upload-sarif@v3
       #   with:
@@ -85,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: snyk-scan-results
-          path: snyk-results.json
+          path: snyk-results.sarif
 
       # DAST: OWASP ZAP Scan
       - name: Start Juice Shop Container
