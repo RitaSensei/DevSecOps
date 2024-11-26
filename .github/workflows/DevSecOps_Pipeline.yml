@@ -179,7 +179,6 @@ jobs:
           echo "Final Files Structure:"
           ls -R analysis-results/
 
-
   # redeploy:
   #     name: Redeploy Juice Shop App
   #     runs-on: ubuntu-latest
