@@ -68,12 +68,14 @@ jobs:
         run: npm install
         
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/setup@master
+        uses: snyk/actions/node@master
         with:
           command: snyk test --json-file-output=snyk-results.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
+          
+      - name: Verify Snyk report file existence
+        run: ls -la
       # - name: Upload Snyk scan results to Github Code Scanning
       #   uses: github/codeql-action/upload-sarif@v3
       #   with:
@@ -196,3 +198,18 @@ jobs:
           echo "Quality Gate Status: ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
           echo "Final Files Structure:"
           ls -R analysis-results/
+
+  # redeploy:
+  #     name: Redeploy Juice Shop App
+  #     runs-on: ubuntu-latest
+  #     needs: vulnerability_management
+  #     if: success()
+  
+  #     steps:
+  #       - name: Pull the latest Juice Shop docker image
+  #         run: docker pull bkimminich/juice-shop
+  
+  #       - name: Deploy & Verify Juice Shop App working
+  #         run: |
+  #           docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
+  #           timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 5; done' || false
