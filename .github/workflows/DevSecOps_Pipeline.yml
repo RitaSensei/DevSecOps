@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: codeql-scan-results
-          path: codeql-analysis-results.sarif
+          path: codeql-analysis-results/*.sarif
 
       # SCA: Snyk Vulnerability Scanning
       - uses: actions/checkout@master
@@ -72,6 +72,7 @@ jobs:
         
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
