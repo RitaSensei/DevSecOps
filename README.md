@@ -72,13 +72,13 @@ The pipeline integrates security testing to ensure that vulnerabilities are iden
  - Prerequisites:
     - Configure SonarCloud with SONAR_TOKEN, SONAR_PROJECT_KEY, and SONAR_ORGANIZATION secrets.
     - Ensure SonarCloud analysis is set up in the pipeline.
+---
 
-## Licensing
+## Screenshots
+- **SonarCloud Analysis**:
+  
+  ![SonarCloud Analysis Screenshot](DevSecOps-Outputs-Images/sonarcloud-scan.png)
 
-[![license](https://img.shields.io/github/license/bkimminich/juice-shop.svg)](LICENSE)
-
-This program is free software: you can redistribute it and/or modify it under the terms of the [MIT license](LICENSE).
-OWASP Juice Shop and any contributions are Copyright © by Bjoern Kimminich & the OWASP Juice Shop contributors
-2014-2024.
-
-![Juice Shop Logo](https://raw.githubusercontent.com/bkimminich/juice-shop/master/frontend/src/assets/public/images/JuiceShop_Logo_400px.png)
+- **OWASP ZAP Report**:
+   
+  ![OWASP ZAP Report](DevSecOps-Outputs-Images/zap-report.png)
