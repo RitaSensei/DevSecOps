@@ -63,16 +63,16 @@ jobs:
           path: codeql-analysis-results.json
 
       # SCA: Snyk Vulnerability Scanning
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@master
       - name: Install the dependencies
         run: npm install
         
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
-        with:
-          command: snyk test --json-file-output=snyk-results.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: snyk test --json-file-output=snyk-results.json
           
       - name: Verify Snyk report file existence
         run: ls -la
